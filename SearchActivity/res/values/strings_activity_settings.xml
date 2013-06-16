@@ -1,0 +1,38 @@
+<resources>
+
+    <string name="title_activity_settings">Settings</string>
+
+    <string-array name="imagezlist">
+        <item></item>
+        <item >icon</item>
+        <item >small</item>
+        <item >medium</item>
+        <item >large</item>
+        <item >xlarge</item>
+        <item >xxlarge</item>
+        <item >huge</item>
+    </string-array>
+    
+    <string-array name="imgtypelist">
+        <item></item>
+        <item >face</item>
+        <item >photo</item>
+        <item >clipart</item>
+        <item >lineart</item>
+    </string-array>
+    
+      <string-array name="imgcolorlist">
+        <item></item>  
+        <item >black</item>
+        <item >blue</item>
+        <item >brown</item>
+        <item >gray</item>
+        <item >green</item>
+        <item >orange</item>
+        <item >pink</item>
+        <item >purple</item>
+        <item >red</item>
+        <item >teal</item>
+    </string-array>
+    
+</resources>
