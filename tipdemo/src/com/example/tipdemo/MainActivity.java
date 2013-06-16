@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 @SuppressLint("NewApi")
 public class MainActivity extends Activity {
@@ -34,13 +35,19 @@ public class MainActivity extends Activity {
         	    // TODO Auto-generated method stub  
         	    seekBarValue.setText(String.valueOf(progress)); 
         	    
-        	  //  Double rate = (double) ( progress / 100);
         	    
         	    
-        	    EditText input_num = (EditText) findViewById(R.id.input_num);   
+        	    EditText input_num = (EditText) findViewById(R.id.input_num);  
+        	    Toast toast = Toast.makeText(getApplicationContext(), "please input", Toast.LENGTH_SHORT);
+        	    
+        	    if ( input_num.getText().length() < 0  ) {
            	    Double money =  Double.parseDouble(input_num.getText().toString());
        	        Double tip =  ( money * progress ) / 100 ;
        	        setResult(tip);
+       	        toast.cancel();
+        	    } else {
+        	    	toast.show();      	    	
+        	    }
         	    
        }  
         	  
@@ -61,37 +68,27 @@ public class MainActivity extends Activity {
 
      public void onTen(View v){
     	 EditText input_num = (EditText) findViewById(R.id.input_num);  
+    	 
+    	 Toast toast = Toast.makeText(getApplicationContext(), "please input", Toast.LENGTH_SHORT);
+    	
+		if ( input_num.getText().length() < 0 ) {
     	 int tiprate = Integer.parseInt(v.getTag().toString());
-    	 Double money =  Double.parseDouble(input_num.getText().toString());	   
+    	    Double money =  Double.parseDouble(input_num.getText().toString());	   
 	        Double tip = ( money * tiprate ) / 100;
 	        SeekBar seekBar = (SeekBar)findViewById(R.id.seekBar1);
 	        seekBar.setProgress(tiprate);
+	        toast.cancel();
 	        setResult(tip);
+    	 } else {
+    		 toast.show();
+    	 }
+    	 
 	    }
     
-     /*
-     public void onfifteen(View v){
-    	 EditText input_num = (EditText) findViewById(R.id.input_num);   
-    	 Double money =  Double.parseDouble(input_num.getText().toString());
-    	    int rate1 = 15;
-	        Double tip = ( money * rate1 ) / 100;
-	        SeekBar seekBar = (SeekBar)findViewById(R.id.seekBar1);
-	        seekBar.setProgress(rate1);
-	        setResult(tip);
-	    }
-     
-     public void twenty(View v, int rateinput){
-    	 EditText input_num = (EditText) findViewById(R.id.input_num);   
-    	 Double money =  Double.parseDouble(input_num.getText().toString());
-    	    int rate1 = 20;
-	        Double tip = ( money * rate1 ) / 100;
-	        SeekBar seekBar = (SeekBar)findViewById(R.id.seekBar1);
-	        seekBar.setProgress(rate1);
-	        setResult(tip);
-	    }
-     */
+
      private void setResult(Double money){
          TextView resultText = (TextView)findViewById(R.id.tipresult);
+         
          resultText.setText(String.valueOf(money));
      }
      
