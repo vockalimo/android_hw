@@ -63,18 +63,20 @@ public class SearchActivity extends Activity {
 		etQuery = (EditText) findViewById(R.id.etQuery);
 		gvResults = (GridView) findViewById(R.id.gvResults);
 		btnSearch = (Button) findViewById(R.id.btnSearch);
-		initBundle();
+	//	initBundle();
 		
 		
 		
 	}
 
 	public void initBundle() {
-		bundle.putString("imagez_choose", "aa");
 		bundle.putString("imagez_choose", "");
 		bundle.putString("color_filter_choose", "" );
-		bundle.putString("imagte_type_choose", "" );
+		bundle.putString("image_type_choose", "" );
 		bundle.putString("site_filter", "" );
+		bundle.putInt("imagez_choose_index", 1);
+		bundle.putInt("color_filter_index", 2);
+		bundle.putInt("image_type_choose", 3);
 	}
 	
 	
@@ -87,16 +89,15 @@ public class SearchActivity extends Activity {
 		
 		boolean hassetting = false;
 		hassetting  = getIntent().getBooleanExtra("hassetting", false);
+
 		if (hassetting == true) {
 			bundle = getIntent().getExtras();
 		} else {
+			Log.d("initdara",bundle.getString("imagez_choose"));
 			initBundle();
 		}
-	//	Instent i  =  this.getIntent();
-		
-		if (bundle.getString("imagez_choose") == null) {
-			initBundle();
-		}
+
+	
 		
 		
 		if (bundle.getString("imagez_choose") != "")
@@ -142,24 +143,32 @@ public class SearchActivity extends Activity {
 		});
 	}
 
-	public void chageToOptionViews(View v) {
-		Intent i = new Intent(this, SettingActivity.class);
-	//	i.putExtra(SearchOptationsIntentKey, this.searchOptations);
-		i.putExtras(bundle);
-		startActivity(i);
-	}
-	
-	
+		
 	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		boolean hassetting = false;
+		hassetting  = getIntent().getBooleanExtra("hassetting", false);
+
+		if (hassetting == true) {
+			bundle = getIntent().getExtras();
+			bundle.putInt("color_filter_index", bundle.getInt("color_filter_index"));
+			String s = String.valueOf(bundle.getInt("color_filter_index")); 
+			Log.d("DEBUG data menu : ", s);
+			
+		} else {
+			Log.d("initdara"," initdata ");
+			initBundle();
+		}
+		
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_settings:
-			Intent i = new Intent(this, SettingActivity.class);
-		//	i.putExtras(bundle);
-			startActivity(i);
-	//	Intent i = new Intent(this, SearchOptionsActivity.class);
-	//	i.putExtra(SearchOptationsIntentKey, this.searchOptations);
-	//	startActivity(i);
+			Intent intent = new Intent();
+			intent.putExtras(bundle);
+			intent.setClass(getApplicationContext(), SettingActivity.class);
+			startActivity(intent);
+
+			
 			break;
 
 		}
